@@ -2,6 +2,7 @@
 #include "logging.hpp"
 #include <SDL.h>
 #include <iostream>
+#include <format>
 
 int Game::Initialize() {
 
@@ -15,7 +16,7 @@ int Game::Initialize() {
 	this->window = SDL_CreateWindow(
 		"Simple Scroll-Shooter",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		640, 480,
+		480, 640,
 		0
 	);
 
@@ -39,6 +40,8 @@ int Game::Initialize() {
 
 void Game::MainLoop() {
 
+	logging::InfoColored(MODULE_NAME, "Entering MainLoop");
+
 	SDL_Event e;
 	bool is_running = true;
 
@@ -51,7 +54,7 @@ void Game::MainLoop() {
 			}
 		}
 	}
-	logging::Warn(MODULE_NAME, "Exited MainLoop");
+	logging::InfoColored(MODULE_NAME, "Exited MainLoop");
 	logging::Info(MODULE_NAME, "Destroying window and renderer...");
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);

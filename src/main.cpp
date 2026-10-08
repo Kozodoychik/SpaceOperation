@@ -1,9 +1,9 @@
-﻿#include <iostream>
-#include "game.hpp"
+﻿#include "game.hpp"
 #include "logging.hpp"
 
 int main(int argc, char* argv[])
 {
+    logging::OpenLogFile();
 
     Game* game = new Game();
     int status = game->Initialize();
@@ -11,8 +11,9 @@ int main(int argc, char* argv[])
     if (status) return status;
 
     game->MainLoop();
-    
 
+    logging::CloseLogFile();
+    
     return 0;
 
 }
