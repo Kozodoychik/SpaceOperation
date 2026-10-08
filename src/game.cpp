@@ -39,6 +39,23 @@ int Game::Initialize() {
 
 void Game::MainLoop() {
 
+	SDL_Event e;
+	bool is_running = true;
 
+	while (is_running) {
+		while (SDL_PollEvent(&e)) {
+			switch (e.type) {
+			case SDL_QUIT: {
+				is_running = false;
+			}
+			}
+		}
+	}
+	logging::Warn(MODULE_NAME, "Exited MainLoop");
+	logging::Info(MODULE_NAME, "Destroying window and renderer...");
+	SDL_DestroyRenderer(this->renderer);
+	SDL_DestroyWindow(this->window);
 
+	logging::Info(MODULE_NAME, "Goodbye!");
+	SDL_Quit();
 }
