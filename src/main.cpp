@@ -8,7 +8,10 @@ int main(int argc, char* argv[])
     Game* game = new Game();
     int status = game->Initialize();
 
-    if (status) return status;
+    if (status) {
+        logging::CloseLogFile();
+        return status;
+    }
 
     game->MainLoop();
 
