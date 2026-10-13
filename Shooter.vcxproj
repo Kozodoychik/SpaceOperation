@@ -104,8 +104,8 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
-copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget)\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,8 +126,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SD
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
-copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget)\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,8 +144,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SD
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
-copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget)\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,8 +166,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SD
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
-copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget)\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
