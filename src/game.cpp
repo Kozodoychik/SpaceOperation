@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include "logging.hpp"
+#include "tile.hpp"
 #include <SDL.h>
 #include <iostream>
 #include <format>
@@ -33,6 +34,15 @@ int Game::Initialize() {
 	}
 
 	logging::Info(MODULE_NAME, "Created window");
+
+	Spritesheet* test = new Spritesheet(this->renderer, "assets/spaceship.png", 70, 70);
+
+	SDL_Rect rect = SDL_Rect(0, 0, 70, 70);
+
+	SDL_RenderCopy(this->renderer, test->GetTextureAt(0, 0), 0, &rect);
+	SDL_RenderPresent(this->renderer);
+
+	delete test;
 
 	return 0;
 

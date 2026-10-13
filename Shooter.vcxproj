@@ -71,14 +71,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\x64</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget);$(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)</LibraryPath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)\src</SourcePath>
+    <IncludePath>$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\libs\SDL2_image-2.8.4\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\x64</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget);$(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)</LibraryPath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)\src</SourcePath>
+    <IncludePath>$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\libs\SDL2_image-2.8.4\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget);$(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)</LibraryPath>
+    <SourcePath>$(VC_SourcePath);$(ProjectDir)\src</SourcePath>
+    <IncludePath>$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\libs\SDL2_image-2.8.4\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)\libs\SDL2-2.30.9\lib\$(PlatformTarget);$(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)</LibraryPath>
+    <SourcePath>$(VC_SourcePath);$(ProjectDir)\src</SourcePath>
+    <IncludePath>$(ProjectDir)\libs\SDL2-2.30.9\include;$(ProjectDir)\libs\SDL2_image-2.8.4\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,13 +96,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x86\SDL2.dll $(OutputPath)\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,15 +116,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x86\SDL2.dll $(OutputPath)\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,10 +141,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,15 +163,19 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib;SDL2.lib;SDL2_image.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll</Command>
+      <Command>copy $(ProjectDir)\libs\SDL2-2.30.9\lib\x64\SDL2.dll $(OutputPath)\SDL2.dll
+copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\x64\SDL2_image.dll $(OutputPath)\SDL2_image.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\game.hpp" />
     <ClInclude Include="include\logging.hpp" />
+    <ClInclude Include="include\sprite.hpp" />
+    <ClInclude Include="include\tile.hpp" />
+    <ClInclude Include="include\types.hpp" />
     <ClInclude Include="libs\SDL2-2.30.9\include\begin_code.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\close_code.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\SDL.h" />
@@ -246,11 +267,17 @@
     <ClInclude Include="libs\SDL2-2.30.9\include\SDL_version.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\SDL_video.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\SDL_vulkan.h" />
+    <ClInclude Include="libs\SDL2_image-2.8.4\include\SDL_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\logging.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\sprite.cpp" />
+    <ClCompile Include="src\tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\spaceship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

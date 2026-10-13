@@ -16,6 +16,9 @@
     <Filter Include="Файлы заголовков\SDL">
       <UniqueIdentifier>{7c35664e-c220-49b9-b840-766e7107b02f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\SDL_Image">
+      <UniqueIdentifier>{71bff7d8-0893-415e-9419-b21d2ce1a0eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\SDL2-2.30.9\include\begin_code.h">
@@ -297,6 +300,18 @@
     <ClInclude Include="include\logging.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\sprite.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tile.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\types.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\SDL2_image-2.8.4\include\SDL_image.h">
+      <Filter>Файлы заголовков\SDL_Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -308,5 +323,16 @@
     <ClCompile Include="src\logging.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\sprite.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tile.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\spaceship.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -15,6 +15,8 @@ int main(int argc, char* argv[])
 
     game->MainLoop();
 
+    delete game;
+
     logging::CloseLogFile();
     
     return 0;
