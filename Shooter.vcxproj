@@ -173,8 +173,9 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <ClInclude Include="include\game.hpp" />
     <ClInclude Include="include\logging.hpp" />
+    <ClInclude Include="include\player.hpp" />
     <ClInclude Include="include\sprite.hpp" />
-    <ClInclude Include="include\tile.hpp" />
+    <ClInclude Include="include\spritesheet.hpp" />
     <ClInclude Include="include\types.hpp" />
     <ClInclude Include="libs\SDL2-2.30.9\include\begin_code.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\close_code.h" />
@@ -273,8 +274,9 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\logging.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\sprite.cpp" />
-    <ClCompile Include="src\tile.cpp" />
+    <ClCompile Include="src\spritesheet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\spaceship.png" />

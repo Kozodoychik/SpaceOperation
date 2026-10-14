@@ -1,4 +1,4 @@
-#include "tile.hpp"
+#include "spritesheet.hpp"
 #include "logging.hpp"
 #include <SDL.h>
 #include <SDL_image.h>
@@ -51,18 +51,18 @@ SDL_Texture* Spritesheet::GetTextureAt(int x, int y) {
 		this->renderer,
 		SDL_PIXELFORMAT_RGBA8888,
 		SDL_TEXTUREACCESS_TARGET,
-		this->tileSize.w,
-		this->tileSize.h
+		(int)this->tileSize.w,
+		(int)this->tileSize.h
 	);
 
 	SDL_Rect dstRect = {
 		0, 0,
-		this->tileSize.w, this->tileSize.h
+		(int)this->tileSize.w, (int)this->tileSize.h
 	};
 
 	SDL_Rect srcRect = {
-		this->tileSize.w * x, this->tileSize.h * y,
-		this->tileSize.w, this->tileSize.h
+		(int)this->tileSize.w * x, (int)this->tileSize.h * y,
+		(int)this->tileSize.w, (int)this->tileSize.h
 	};
 
 	SDL_SetRenderTarget(this->renderer, texture);

@@ -303,7 +303,7 @@
     <ClInclude Include="include\sprite.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\tile.hpp">
+    <ClInclude Include="include\spritesheet.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="include\types.hpp">
@@ -311,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="libs\SDL2_image-2.8.4\include\SDL_image.h">
       <Filter>Файлы заголовков\SDL_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="include\player.hpp">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -326,7 +329,10 @@
     <ClCompile Include="src\sprite.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\tile.cpp">
+    <ClCompile Include="src\spritesheet.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

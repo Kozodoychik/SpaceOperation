@@ -1,29 +1,34 @@
+#ifndef TYPES_HPP
+#define TYPES_HPP
+
 namespace types {
 	
 	typedef struct {
 		union {
-			int x;
-			int w;
+			double x;
+			double w;
 		};
 		union {
-			int y;
-			int h;
+			double y;
+			double h;
 		};
 	} Vector2d;
 
 	typedef struct {
 		union {
-			int x;
-			int r;
+			double x;
+			double r;
 		};
 		union {
-			int y;
-			int g;
+			double y;
+			double g;
 		};
 		union {
-			int z;
-			int b;
+			double z;
+			double b;
 		};
 	} Vector3d;
 
 }
+
+#endif

@@ -1,9 +1,11 @@
-#include "game.hpp"
-#include "logging.hpp"
-#include "tile.hpp"
 #include <SDL.h>
 #include <iostream>
 #include <format>
+#include "game.hpp"
+#include "logging.hpp"
+#include "spritesheet.hpp"
+#include "player.hpp"
+
 
 int Game::Initialize() {
 
@@ -26,7 +28,7 @@ int Game::Initialize() {
 		return -1;
 	}
 
-	this->renderer = SDL_CreateRenderer(this->window, 0, -1);
+	this->renderer = SDL_CreateRenderer(this->window, 0, SDL_RENDERER_ACCELERATED);
 
 	if (this->renderer == NULL) {
 		logging::Fatal(MODULE_NAME, std::format("Cannot create renderer: {}", SDL_GetError()).c_str());
@@ -35,14 +37,9 @@ int Game::Initialize() {
 
 	logging::Info(MODULE_NAME, "Created window");
 
-	Spritesheet* test = new Spritesheet(this->renderer, "assets/spaceship.png", 70, 70);
+	Player* p = new Player(this->renderer);
 
-	SDL_Rect rect = SDL_Rect(0, 0, 70, 70);
-
-	SDL_RenderCopy(this->renderer, test->GetTextureAt(0, 0), 0, &rect);
-	SDL_RenderPresent(this->renderer);
-
-	delete test;
+	this->sprites.push_back((Sprite*)p);
 
 	return 0;
 
@@ -53,17 +50,52 @@ void Game::MainLoop() {
 	logging::InfoColored(MODULE_NAME, "Entering MainLoop");
 
 	SDL_Event e;
+	double frame_time = 1.0 / 60.0;
+
 	bool is_running = true;
+	double dt = 0;
 
 	while (is_running) {
+		Uint64 frame_start = SDL_GetPerformanceCounter();
+
+		// Отображаем спрайты
+
+		SDL_RenderClear(this->renderer);
+
+		for (auto sprite : this->sprites) {
+			sprite->Render(dt);
+		}
+
+		SDL_RenderPresent(this->renderer);
+		SDL_UpdateWindowSurface(this->window);
+
+		// Обрабатываем события
+
 		while (SDL_PollEvent(&e)) {
 			switch (e.type) {
 			case SDL_QUIT: {
 				is_running = false;
+				break;
+			}
+			default: {
+				for (auto sprite : this->sprites) {
+					sprite->OnEvent(e);
+				}
 			}
 			}
 		}
+
+		// Подсчитываем deltaTime и ограничиваем FPS до 60
+
+		Uint64 frame_end = SDL_GetPerformanceCounter();
+
+		dt = ((double)(frame_end - frame_start) / (double)SDL_GetPerformanceFrequency());
+
+		if (dt < frame_time) {
+			SDL_Delay((Uint32)floor(frame_time - dt) * 1000.0);
+		}
 	}
+
 	logging::InfoColored(MODULE_NAME, "Exited MainLoop");
 	logging::Info(MODULE_NAME, "Destroying window and renderer...");
 	SDL_DestroyRenderer(this->renderer);
