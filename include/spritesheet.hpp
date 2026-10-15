@@ -1,3 +1,6 @@
+#ifndef SPRITESHEET_HPP
+#define SPRITESHEET_HPP
+
 #include <SDL.h>
 #include <unordered_map>
 #include "types.hpp"
@@ -18,3 +21,5 @@ public:
 
 	SDL_Texture* GetTextureAt(int x, int y);
 };
+
+#endif

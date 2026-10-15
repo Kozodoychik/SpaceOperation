@@ -46,7 +46,9 @@ SpriteRenderer::SpriteRenderer(SDL_Renderer* renderer) {
 }
 
 SpriteRenderer::~SpriteRenderer() {
-	
+	for (Sprite* sprite : this->sprites) {
+		delete sprite;
+	}
 }
 
 void SpriteRenderer::Render(double dt) {

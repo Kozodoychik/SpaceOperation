@@ -7,6 +7,9 @@
 #include "bullet.hpp"
 #include "logging.hpp"
 
+#define MAX_ACCELERATION 40
+#define MAX_ROTATION_SPEED 60
+
 Asteroid::Asteroid(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "assets/asteroid.png", x, y, 46, 43) {
 	this->acceleration = 10;
 
@@ -18,9 +21,9 @@ Asteroid::Asteroid(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "a
 	this->size.h *= this->size_type;
 
 	this->angle = rand() % 360;
-	this->rotation_speed = rand() % 60 * pow(-1, rand() % 2);
+	this->rotation_speed = rand() % MAX_ROTATION_SPEED * pow(-1, rand() % 2);
 	this->hp = 5 + (this->size_type * 5);
-	this->acceleration = rand() % 10;
+	this->acceleration = rand() % MAX_ACCELERATION;
 }
 
 void Asteroid::Render(double dt) {

@@ -321,6 +321,12 @@
     <ClInclude Include="include\asteroid.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\ui.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\events.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -347,6 +353,9 @@
     <ClCompile Include="src\asteroid.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\spaceship.png">
@@ -356,6 +365,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="assets\asteroid.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\font.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

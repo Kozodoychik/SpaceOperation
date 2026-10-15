@@ -3,6 +3,8 @@
 #include "spritesheet.hpp"
 #include "logging.hpp"
 #include "bullet.hpp"
+#include "asteroid.hpp"
+#include "events.hpp"
 
 #define PLAYER_SPEED 250.0
 #define PLAYER_Y_PAD 40
@@ -10,9 +12,13 @@
 #define PLAYER_SPAWN_X 205
 #define PLAYER_SPAWN_Y 570 - PLAYER_Y_PAD
 
+#define PLAYER_HP 100
+
 Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.png", PLAYER_SPAWN_X, PLAYER_SPAWN_Y, 70, 70) {
 	this->key_map.flags = 0;
 	this->bullet_timer = 0;
+	this->hit_timer = 0;
+	this->hp = PLAYER_HP;
 }
 
 Player::~Player() {
@@ -37,7 +43,15 @@ void Player::Render(double dt) {
 		this->bullet_timer += dt;
 	}
 
-	Sprite::Render(dt);
+	if (this->hit_timer > 0) {
+		if ((int)this->hit_timer % 2 == 0)
+			Sprite::Render(dt);
+
+		this->hit_timer -= 4 * dt;
+	}
+	else {
+		Sprite::Render(dt);
+	}
 }
 
 void Player::OnEvent(SDL_Event e) {
@@ -69,5 +83,19 @@ void Player::OnEvent(SDL_Event e) {
 
 		break;
 	}
+	}
+}
+
+void Player::OnCollision(Sprite* collided) {
+	if (dynamic_cast<const Asteroid*>(collided) != nullptr && this->hit_timer <= 0) {
+		this->sprite_renderer->DestroySprite(collided);
+		this->hp -= 10;
+		this->hit_timer = 20;
+
+		if (this->hp == 0) {
+			SDL_Event e{EVENT_GAME_OVER};
+			SDL_PushEvent(&e);
+			this->sprite_renderer->DestroySprite(this);
+		}
 	}
 }

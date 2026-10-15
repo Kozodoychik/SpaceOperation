@@ -15,13 +15,18 @@ typedef union {
 class Player : public Sprite {
 private:
 	double bullet_timer;
+	double hit_timer;
+
 	bool is_moving = false;
 	KeyMap key_map;
 
 public:
+	int hp;
+
 	Player(SpriteRenderer* renderer);
 	~Player();
 
 	void Render(double dt) override;
 	void OnEvent(SDL_Event e) override;
+	void OnCollision(Sprite* collided) override;
 };

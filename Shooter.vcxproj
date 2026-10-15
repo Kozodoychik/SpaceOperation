@@ -173,12 +173,14 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <ClInclude Include="include\asteroid.hpp" />
     <ClInclude Include="include\bullet.hpp" />
+    <ClInclude Include="include\events.hpp" />
     <ClInclude Include="include\game.hpp" />
     <ClInclude Include="include\logging.hpp" />
     <ClInclude Include="include\player.hpp" />
     <ClInclude Include="include\sprite.hpp" />
     <ClInclude Include="include\spritesheet.hpp" />
     <ClInclude Include="include\types.hpp" />
+    <ClInclude Include="include\ui.hpp" />
     <ClInclude Include="libs\SDL2-2.30.9\include\begin_code.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\close_code.h" />
     <ClInclude Include="libs\SDL2-2.30.9\include\SDL.h" />
@@ -281,10 +283,12 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\spritesheet.cpp" />
+    <ClCompile Include="src\ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\asteroid.png" />
     <Image Include="assets\bullet.png" />
+    <Image Include="assets\font.png" />
     <Image Include="assets\spaceship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
