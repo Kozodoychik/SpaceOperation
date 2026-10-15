@@ -1,9 +1,12 @@
 #include <SDL.h>
+#include <unordered_map>
 #include "types.hpp"
 
 
 class Spritesheet {
 private:
+	static std::unordered_map<const char*, SDL_Texture*> spritesheet_cache;
+
 	types::Vector2d tileSize;
 	SDL_Texture* texture;
 	SDL_Renderer* renderer;
@@ -15,15 +18,3 @@ public:
 
 	SDL_Texture* GetTextureAt(int x, int y);
 };
-
-/*class Tile {
-private:
-
-public:
-
-	Tile();
-	~Tile();
-
-	SDL_Texture* GetTexture();
-
-};*/

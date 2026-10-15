@@ -171,6 +171,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\asteroid.hpp" />
+    <ClInclude Include="include\bullet.hpp" />
     <ClInclude Include="include\game.hpp" />
     <ClInclude Include="include\logging.hpp" />
     <ClInclude Include="include\player.hpp" />
@@ -271,6 +273,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClInclude Include="libs\SDL2_image-2.8.4\include\SDL_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\asteroid.cpp" />
+    <ClCompile Include="src\bullet.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\logging.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -279,6 +283,8 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClCompile Include="src\spritesheet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\asteroid.png" />
+    <Image Include="assets\bullet.png" />
     <Image Include="assets\spaceship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

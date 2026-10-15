@@ -1,11 +1,15 @@
 #include <SDL.h>
 #include <iostream>
 #include <format>
+#include <cstdlib>
+#include <ctime>
 #include "game.hpp"
 #include "logging.hpp"
 #include "spritesheet.hpp"
 #include "player.hpp"
+#include "asteroid.hpp"
 
+#define ASTEROID_CHANCE 10000 // 1 к 10000
 
 int Game::Initialize() {
 
@@ -37,9 +41,11 @@ int Game::Initialize() {
 
 	logging::Info(MODULE_NAME, "Created window");
 
-	Player* p = new Player(this->renderer);
+	this->sprite_renderer = new SpriteRenderer(this->renderer);
 
-	this->sprites.push_back((Sprite*)p);
+	Player* p = new Player(this->sprite_renderer);
+
+	this->sprite_renderer->AddSprite(p);
 
 	return 0;
 
@@ -58,13 +64,13 @@ void Game::MainLoop() {
 	while (is_running) {
 		Uint64 frame_start = SDL_GetPerformanceCounter();
 
-		// Отображаем спрайты
+		this->GenerateAsteroids();
 
+		// Отображаем спрайты
+		SDL_SetRenderDrawColor(this->renderer, 0, 0, 40, 255);
 		SDL_RenderClear(this->renderer);
 
-		for (auto sprite : this->sprites) {
-			sprite->Render(dt);
-		}
+		this->sprite_renderer->Render(dt);
 
 		SDL_RenderPresent(this->renderer);
 		SDL_UpdateWindowSurface(this->window);
@@ -78,9 +84,7 @@ void Game::MainLoop() {
 				break;
 			}
 			default: {
-				for (auto sprite : this->sprites) {
-					sprite->OnEvent(e);
-				}
+				this->sprite_renderer->HandleEvent(e);
 			}
 			}
 		}
@@ -103,4 +107,15 @@ void Game::MainLoop() {
 
 	logging::Info(MODULE_NAME, "Goodbye!");
 	SDL_Quit();
+}
+
+void Game::GenerateAsteroids() {
+	srand(SDL_GetPerformanceCounter());
+	
+	int x = rand() % 480;
+
+	if (rand() % ASTEROID_CHANCE == 0) {
+		Asteroid* asteroid = new Asteroid(this->sprite_renderer, x, -300);
+		this->sprite_renderer->AddSprite(asteroid);
+	}
 }

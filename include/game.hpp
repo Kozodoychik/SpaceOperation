@@ -9,11 +9,12 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	std::vector<Sprite*> sprites;
+	SpriteRenderer* sprite_renderer;
 
 public:
 	int Initialize();
 
 	void MainLoop();
+	void GenerateAsteroids();
 
 };
