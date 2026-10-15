@@ -13,6 +13,9 @@ private:
 	SpriteRenderer* sprite_renderer;
 	UIRenderer* ui_renderer;
 
+	bool is_running;
+	bool is_gameover;
+
 public:
 
 	int Initialize();

@@ -1,12 +1,9 @@
 #include "bullet.hpp"
 #include "sprite.hpp"
-#include "logging.hpp"
 
-Bullet::Bullet(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "assets/bullet.png", x, y, 5, 16) {
-}
+Bullet::Bullet(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "assets/bullet.png", x, y, 5, 16) {}
 
-Bullet::~Bullet() {
-}
+Bullet::~Bullet() {}
 
 void Bullet::Render(double dt) {
 	Sprite::Render(dt);

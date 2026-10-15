@@ -85,3 +85,12 @@ SDL_Texture* Spritesheet::GetTextureAt(int x, int y) {
 
 	return texture;
 }
+
+void Spritesheet::CopyTo(int x, int y, SDL_Rect* dstRect) {
+	SDL_Rect srcRect = {
+		(int)this->tileSize.w * x, (int)this->tileSize.h * y,
+		(int)this->tileSize.w, (int)this->tileSize.h
+	};
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+	SDL_RenderCopy(this->renderer, this->texture, &srcRect, dstRect);
+}

@@ -20,6 +20,7 @@ public:
 	~Spritesheet();
 
 	SDL_Texture* GetTextureAt(int x, int y);
+	void CopyTo(int x, int y, SDL_Rect* dstrect);
 };
 
 #endif

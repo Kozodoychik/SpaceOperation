@@ -10,7 +10,7 @@
 #include "ui.hpp"
 #include "events.hpp"
 
-#define ASTEROID_CHANCE 1000 // 1 к 1000
+#define ASTEROID_CHANCE 10000 // 1 к 10000
 
 int Game::Initialize() {
 
@@ -45,6 +45,9 @@ int Game::Initialize() {
 	this->sprite_renderer = new SpriteRenderer(this->renderer);
 	this->ui_renderer = new UIRenderer(this->renderer);
 
+	this->is_running = true;
+	this->is_gameover = false;
+
 	return 0;
 
 }
@@ -61,11 +64,9 @@ void Game::MainLoop() {
 	SDL_Event e;
 	double frame_time = 1.0 / 60.0;
 
-	bool is_running = true;
-	bool is_game_over = false;
 	double dt = 0;
 
-	while (is_running) {
+	while (this->is_running) {
 		Uint64 frame_start = SDL_GetPerformanceCounter();
 
 		hp_label->text = std::format("HP: {}", player->hp);
@@ -73,12 +74,12 @@ void Game::MainLoop() {
 		SDL_SetRenderDrawColor(this->renderer, 0, 0, 40, 255);
 		SDL_RenderClear(this->renderer);
 
-		this->GenerateAsteroids();
-
 		// Отображаем спрайты
 
-		if (!is_game_over)
+		if (!this->is_gameover) {
+			this->GenerateAsteroids();
 			this->sprite_renderer->Render(dt);
+		}
 
 		this->ui_renderer->Render(dt);
 
@@ -92,16 +93,16 @@ void Game::MainLoop() {
 				Label* game_over_label = new Label(this->renderer, "GAME OVER!", 160, 312, 16);
 				this->ui_renderer->AddWidget(game_over_label);
 
-				is_game_over = true;
+				this->is_gameover = true;
 			}
 
 			switch (e.type) {
 			case SDL_QUIT: {
-				is_running = false;
+				this->is_running = false;
 				break;
 			}
 			default: {
-				if (!is_game_over)
+				if (!this->is_gameover)
 					this->sprite_renderer->HandleEvent(e);
 			}
 			}

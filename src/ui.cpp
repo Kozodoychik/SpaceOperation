@@ -33,13 +33,10 @@ void Label::Render(double dt) {
 			this->size.w, this->size.h
 		};
 		char c = this->text[i];
-
 		int charX = c % 16;
 		int charY = c / 16;
 
-		SDL_Texture* glyph = this->font->GetTextureAt(charX, charY);
-
-		SDL_RenderCopy(this->renderer, glyph, NULL, &rect);
+		this->font->CopyTo(charX, charY, &rect);
 	}
 }
 
