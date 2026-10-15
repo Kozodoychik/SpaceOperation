@@ -2,7 +2,6 @@
 #include <iostream>
 #include <format>
 #include <cstdlib>
-#include <ctime>
 #include "game.hpp"
 #include "logging.hpp"
 #include "spritesheet.hpp"
@@ -11,7 +10,7 @@
 #include "ui.hpp"
 #include "events.hpp"
 
-#define ASTEROID_CHANCE 1000 // 1 ê 10000
+#define ASTEROID_CHANCE 1000 // 1 ê 1000
 
 int Game::Initialize() {
 
@@ -139,6 +138,5 @@ void Game::GenerateAsteroids() {
 	if (rand() % ASTEROID_CHANCE == 0) {
 		Asteroid* asteroid = new Asteroid(this->sprite_renderer, x, -300);
 		this->sprite_renderer->AddSprite(asteroid);
-		std::cout << SDL_GetTicks() << "\n";
 	}
 }
