@@ -1,5 +1,6 @@
 #include <string>
 #include <format>
+#include <cstdlib>
 #include "ui.hpp"
 #include "spritesheet.hpp"
 #include "logging.hpp"
@@ -29,14 +30,14 @@ Label::~Label() {
 void Label::Render(double dt) {
 	for (int i = 0; i < this->text.length(); i++) {
 		SDL_Rect rect = {
-			this->pos.x + (i * this->size.w), this->pos.y,
-			this->size.w, this->size.h
+			(int)(this->pos.x + (i * this->size.w)), (int)this->pos.y,
+			(int)this->size.w, (int)this->size.h
 		};
 		char c = this->text[i];
 		int charX = c % 16;
 		int charY = c / 16;
 
-		this->font->CopyTo(charX, charY, &rect);
+		this->font->CopyTileTo(charX, charY, &rect);
 	}
 }
 
@@ -61,7 +62,7 @@ void UIRenderer::Render(double dt) {
 	}
 	this->to_destroy.clear();
 
-	int count = this->widgets.size();
+	std::size_t count = this->widgets.size();
 
 	for (int i = 0; i < count; i++) {
 		this->widgets[i]->Render(dt);

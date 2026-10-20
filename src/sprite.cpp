@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include <cmath>
+#include <cstdlib>
 #include "sprite.hpp"
 #include "spritesheet.hpp"
 #include "logging.hpp"
@@ -8,28 +10,32 @@ Sprite::Sprite(SpriteRenderer* renderer, const char* texture_file, double x, dou
 
 	this->sprite_renderer = renderer;
 
-	Spritesheet* spritesheet = new Spritesheet(this->sprite_renderer->renderer, texture_file, (int)w, (int)h);
+	this->spritesheet = new Spritesheet(this->sprite_renderer->renderer, texture_file, (int)w, (int)h);
 
-	this->texture = spritesheet->GetTextureAt(0, 0);
 	this->pos = { x, y };
 	this->size = { w, h };
+	this->rotation_angle = 0;
 
-	delete spritesheet;
-
+	this->hitbox = {
+		0, 0,
+		(int)floor(w), (int)floor(h)
+	};
 }
 
 Sprite::~Sprite() {
-	SDL_DestroyTexture(this->texture);
+	delete this->spritesheet;
 }
 
 void Sprite::Render(double dt) {
 
 	SDL_Rect rect = {
-		(int)this->pos.x, (int)this->pos.y,
-		(int)this->size.w, (int)this->size.h
+		(int)(floor(this->pos.x)), (int)(floor(this->pos.y)),
+		(int)(floor(this->size.w)), (int)(floor(this->size.h))
 	};
+	
+	SDL_Point center = { int(this->size.w) / 2, int(this->size.h) / 2 };
 
-	SDL_RenderCopy(this->sprite_renderer->renderer, this->texture, NULL, &rect);
+	this->spritesheet->CopyTileToEx(0, 0, this->rotation_angle, &center, &rect, SDL_FLIP_NONE);
 
 }
 
@@ -63,7 +69,7 @@ void SpriteRenderer::Render(double dt) {
 	}
 	this->to_destroy.clear();
 
-	int count = this->sprites.size();
+	std::size_t count = this->sprites.size();
 
 	for (int i = 0; i < count; i++) {
 		this->sprites[i]->Render(dt);
@@ -71,16 +77,22 @@ void SpriteRenderer::Render(double dt) {
 
 	for (int spriteA = 0; spriteA < count; spriteA++) {
 		SDL_Rect a = {
-			this->sprites[spriteA]->pos.x, this->sprites[spriteA]->pos.y,
-			this->sprites[spriteA]->size.w, this->sprites[spriteA]->size.h
+			(int)this->sprites[spriteA]->pos.x + this->sprites[spriteA]->hitbox.x, 
+			(int)this->sprites[spriteA]->pos.y + this->sprites[spriteA]->hitbox.y,
+			
+			(int)this->sprites[spriteA]->hitbox.w, 
+			(int)this->sprites[spriteA]->hitbox.h
 		};
 
 		for (int spriteB = 0; spriteB < count; spriteB++) {
 			if (spriteA == spriteB) continue;
 
 			SDL_Rect b = {
-				this->sprites[spriteB]->pos.x, this->sprites[spriteB]->pos.y,
-				this->sprites[spriteB]->size.w, this->sprites[spriteB]->size.h
+				(int)this->sprites[spriteB]->pos.x + this->sprites[spriteB]->hitbox.x,
+				(int)this->sprites[spriteB]->pos.y + this->sprites[spriteB]->hitbox.y,
+
+				(int)this->sprites[spriteB]->hitbox.w,
+				(int)this->sprites[spriteB]->hitbox.h
 			};
 
 			if (SDL_HasIntersection(&a, &b)) {
@@ -92,7 +104,7 @@ void SpriteRenderer::Render(double dt) {
 }
 
 void SpriteRenderer::HandleEvent(SDL_Event e) {
-	int count = this->sprites.size();
+	std::size_t count = this->sprites.size();
 
 	for (int i = 0; i < count; i++) {
 		this->sprites[i]->OnEvent(e);

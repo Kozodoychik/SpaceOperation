@@ -10,7 +10,7 @@ Spritesheet::Spritesheet(SDL_Renderer* renderer, const char* path, int tileW, in
 	this->renderer = renderer;
 
 	auto it = this->spritesheet_cache.find(path);
-
+	  
 	if (it != this->spritesheet_cache.end()) {
 		this->texture = it->second;
 	}
@@ -58,39 +58,21 @@ Spritesheet::~Spritesheet() {
 
 }
 
-SDL_Texture* Spritesheet::GetTextureAt(int x, int y) {
-
-	SDL_Texture* texture = SDL_CreateTexture(
-		this->renderer,
-		SDL_PIXELFORMAT_RGBA8888,
-		SDL_TEXTUREACCESS_TARGET,
-		(int)this->tileSize.w,
-		(int)this->tileSize.h
-	);
-
-	SDL_Rect dstRect = {
-		0, 0,
-		(int)this->tileSize.w, (int)this->tileSize.h
-	};
-
+void Spritesheet::CopyTileTo(int tileX, int tileY, SDL_Rect* dstRect) {
 	SDL_Rect srcRect = {
-		(int)this->tileSize.w * x, (int)this->tileSize.h * y,
-		(int)this->tileSize.w, (int)this->tileSize.h
-	};
-
-	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderTarget(this->renderer, texture);
-	SDL_RenderCopy(this->renderer, this->texture, &srcRect, &dstRect);
-	SDL_SetRenderTarget(this->renderer, NULL);
-
-	return texture;
-}
-
-void Spritesheet::CopyTo(int x, int y, SDL_Rect* dstRect) {
-	SDL_Rect srcRect = {
-		(int)this->tileSize.w * x, (int)this->tileSize.h * y,
+		(int)this->tileSize.w * tileX, (int)this->tileSize.h * tileY,
 		(int)this->tileSize.w, (int)this->tileSize.h
 	};
 	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	SDL_RenderCopy(this->renderer, this->texture, &srcRect, dstRect);
+}
+
+void Spritesheet::CopyTileToEx(int tileX, int tileY, double rotation, SDL_Point* center, SDL_Rect* dstRect, SDL_RendererFlip flip) {
+	SDL_Rect srcRect = {
+		(int)this->tileSize.w * tileX, (int)this->tileSize.h * tileY,
+		(int)this->tileSize.w, (int)this->tileSize.h
+	};
+
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+	SDL_RenderCopyEx(this->renderer, this->texture, &srcRect, dstRect, rotation, center, flip);
 }

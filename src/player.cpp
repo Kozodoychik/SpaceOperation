@@ -19,6 +19,11 @@ Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.pn
 	this->bullet_timer = 0;
 	this->hit_timer = 0;
 	this->hp = PLAYER_HP;
+
+	this->hitbox = {
+		19, 8,
+		32, 56
+	};
 }
 
 Player::~Player() {
@@ -35,7 +40,7 @@ void Player::Render(double dt) {
 
 	if (this->key_map.space) {
 		if (this->bullet_timer >= 0.08) {
-			Bullet* bullet = new Bullet(this->sprite_renderer, this->pos.x + 33, this->pos.y - 10);
+			Bullet* bullet = new Bullet(this->sprite_renderer, (int)this->pos.x + 33, (int)this->pos.y - 10);
 			this->sprite_renderer->AddSprite(bullet);
 
 			this->bullet_timer = 0;

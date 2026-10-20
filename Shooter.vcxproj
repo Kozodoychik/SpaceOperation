@@ -288,6 +288,7 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <Image Include="assets\asteroid.png" />
     <Image Include="assets\bullet.png" />
+    <Image Include="assets\explosion.png" />
     <Image Include="assets\font.png" />
     <Image Include="assets\spaceship.png" />
   </ItemGroup>

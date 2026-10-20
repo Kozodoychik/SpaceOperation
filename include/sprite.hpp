@@ -5,17 +5,22 @@
 #include <vector>
 #include <memory>
 #include "types.hpp"
+#include "spritesheet.hpp"
 
 class SpriteRenderer;
 
 class Sprite {
 protected:
 	SpriteRenderer* sprite_renderer;
-	SDL_Texture* texture;
+	Spritesheet* spritesheet;
 
 public:
+	double rotation_angle;
+
 	types::Vector2d pos = { 0, 0 };
 	types::Vector2d size = { 0, 0 };
+
+	SDL_Rect hitbox;
 
 	Sprite(SpriteRenderer* renderer, const char* texture_file, double x, double y, double w, double h);
 	~Sprite();

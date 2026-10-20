@@ -19,8 +19,8 @@ public:
 	Spritesheet(SDL_Renderer* renderer, const char* path, int tileW, int tileH);
 	~Spritesheet();
 
-	SDL_Texture* GetTextureAt(int x, int y);
-	void CopyTo(int x, int y, SDL_Rect* dstrect);
+	void CopyTileTo(int tileX, int tileY, SDL_Rect* dstrect);
+	void CopyTileToEx(int tileX, int tileY, double rotation, SDL_Point* center, SDL_Rect* dstRect, SDL_RendererFlip flip);
 };
 
 #endif

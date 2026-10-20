@@ -370,5 +370,8 @@
     <Image Include="assets\font.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="assets\explosion.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>
