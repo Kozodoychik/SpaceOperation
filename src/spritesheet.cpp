@@ -61,10 +61,10 @@ void Spritesheet::CopyTileTo(int tileX, int tileY, SDL_Rect* dstRect) {
 	int offsetY = (int)this->tileSize.h * tileY;
 
 	if (offsetX >= this->imageSize.w)
-		offsetX -= this->imageSize.w * (int)(offsetX / this->imageSize.w);
+		offsetX -= (int)this->imageSize.w * (int)(offsetX / this->imageSize.w);
 
 	if (offsetY >= this->imageSize.h)
-		offsetY -= this->imageSize.h * (int)(offsetY / this->imageSize.h);
+		offsetY -= (int)this->imageSize.h * (int)(offsetY / this->imageSize.h);
 
 	SDL_Rect srcRect = {
 		offsetX, offsetY,
@@ -80,10 +80,10 @@ void Spritesheet::CopyTileToEx(int tileX, int tileY, double rotation, SDL_Point*
 	int offsetY = (int)this->tileSize.h * tileY;
 
 	if (offsetX >= this->imageSize.w)
-		offsetX -= this->imageSize.w * (offsetX / this->imageSize.w);
+		offsetX -= (int)this->imageSize.w * (int)(offsetX / this->imageSize.w);
 
 	if (offsetY >= this->imageSize.h)
-		offsetY -= this->imageSize.h * (offsetX / this->imageSize.h);
+		offsetY -= (int)this->imageSize.h * (int)(offsetX / this->imageSize.h);
 
 	SDL_Rect srcRect = {
 		offsetX, offsetY,
