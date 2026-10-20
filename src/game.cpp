@@ -81,7 +81,11 @@ void Game::MainLoop() {
 			this->sprite_renderer->Render(dt);
 		}
 
+		// Отображаем элементы интерфейса
+
 		this->ui_renderer->Render(dt);
+
+		// Выводим на экран
 
 		SDL_RenderPresent(this->renderer);
 		SDL_UpdateWindowSurface(this->window);
@@ -89,6 +93,7 @@ void Game::MainLoop() {
 		// Обрабатываем события
 
 		while (SDL_PollEvent(&e)) {
+			// Событие проигрыша
 			if (e.type == EVENT_GAME_OVER) {
 				Label* game_over_label = new Label(this->renderer, "GAME OVER!", 160, 312, 16);
 				this->ui_renderer->AddWidget(game_over_label);
@@ -96,6 +101,7 @@ void Game::MainLoop() {
 				this->is_gameover = true;
 			}
 
+			// Обрабатываем остальные события
 			switch (e.type) {
 			case SDL_QUIT: {
 				this->is_running = false;

@@ -14,6 +14,8 @@
 
 #define PLAYER_HP 100
 
+#define BULLET_COOLDOWN 0.08
+
 Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.png", PLAYER_SPAWN_X, PLAYER_SPAWN_Y, 70, 70) {
 	this->key_map.flags = 0;
 	this->bullet_timer = 0;
@@ -26,10 +28,6 @@ Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.pn
 	};
 }
 
-Player::~Player() {
-
-}
-
 void Player::Render(double dt) {
 	if (this->is_moving) {
 		this->pos.x += this->key_map.d * (PLAYER_SPEED * dt);
@@ -39,7 +37,7 @@ void Player::Render(double dt) {
 	}
 
 	if (this->key_map.space) {
-		if (this->bullet_timer >= 0.08) {
+		if (this->bullet_timer >= BULLET_COOLDOWN) {
 			Bullet* bullet = new Bullet(this->sprite_renderer, (int)this->pos.x + 33, (int)this->pos.y - 10);
 			this->sprite_renderer->AddSprite(bullet);
 

@@ -24,7 +24,6 @@ public:
 	int hp;
 
 	Player(SpriteRenderer* renderer);
-	~Player();
 
 	void Render(double dt) override;
 	void OnEvent(SDL_Event e) override;

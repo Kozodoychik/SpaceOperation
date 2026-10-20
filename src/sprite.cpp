@@ -39,13 +39,8 @@ void Sprite::Render(double dt) {
 
 }
 
-void Sprite::OnEvent(SDL_Event e) {
-
-}
-
-void Sprite::OnCollision(Sprite* collided) {
-
-}
+void Sprite::OnEvent(SDL_Event e) {}
+void Sprite::OnCollision(Sprite* collided) {}
 
 SpriteRenderer::SpriteRenderer(SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -55,6 +50,8 @@ SpriteRenderer::~SpriteRenderer() {
 	for (Sprite* sprite : this->sprites) {
 		delete sprite;
 	}
+
+	Spritesheet::ClearCache();
 }
 
 void SpriteRenderer::Render(double dt) {
