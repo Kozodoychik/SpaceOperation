@@ -7,10 +7,12 @@
 #include "spritesheet.hpp"
 #include "player.hpp"
 #include "asteroid.hpp"
+#include "enemy.hpp"
 #include "ui.hpp"
 #include "events.hpp"
 
-#define ASTEROID_CHANCE 1000 // 1 к 1000
+#define ASTEROID_CHANCE 5000 // 1 к 5000
+#define ENEMY_CHANCE 100000 // 1 к 100000
 
 int Game::Initialize() {
 
@@ -78,6 +80,7 @@ void Game::MainLoop() {
 
 		if (!this->is_gameover) {
 			this->GenerateAsteroids();
+			this->GenerateEnemies();
 			this->sprite_renderer->Render(dt);
 		}
 
@@ -145,5 +148,16 @@ void Game::GenerateAsteroids() {
 	if (rand() % ASTEROID_CHANCE == 0) {
 		Asteroid* asteroid = new Asteroid(this->sprite_renderer, x - 70, -300);
 		this->sprite_renderer->AddSprite(asteroid);
+	}
+}
+
+void Game::GenerateEnemies() {
+	srand(SDL_GetTicks());
+
+	int x = rand() % 480;
+
+	if (rand() % ENEMY_CHANCE == 0) {
+		Enemy* enemy = new Enemy(this->sprite_renderer, x - 70, -50);
+		this->sprite_renderer->AddSprite(enemy);
 	}
 }

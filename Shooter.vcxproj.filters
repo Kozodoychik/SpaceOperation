@@ -327,6 +327,9 @@
     <ClInclude Include="include\events.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\enemy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -356,6 +359,9 @@
     <ClCompile Include="src\ui.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\enemy.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\spaceship.png">
@@ -371,6 +377,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="assets\explosion.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\enemy.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

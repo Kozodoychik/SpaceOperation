@@ -15,6 +15,7 @@ private:
 
 public:
 	Asteroid(SpriteRenderer* renderer, int x, int y);
+	~Asteroid();
 
 	void Render(double dt) override;
 	void OnCollision(Sprite* collided) override;

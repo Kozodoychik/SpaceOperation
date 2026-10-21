@@ -173,6 +173,7 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <ClInclude Include="include\asteroid.hpp" />
     <ClInclude Include="include\bullet.hpp" />
+    <ClInclude Include="include\enemy.hpp" />
     <ClInclude Include="include\events.hpp" />
     <ClInclude Include="include\game.hpp" />
     <ClInclude Include="include\logging.hpp" />
@@ -277,6 +278,7 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <ClCompile Include="src\asteroid.cpp" />
     <ClCompile Include="src\bullet.cpp" />
+    <ClCompile Include="src\enemy.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\logging.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -288,6 +290,7 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   <ItemGroup>
     <Image Include="assets\asteroid.png" />
     <Image Include="assets\bullet.png" />
+    <Image Include="assets\enemy.png" />
     <Image Include="assets\explosion.png" />
     <Image Include="assets\font.png" />
     <Image Include="assets\spaceship.png" />

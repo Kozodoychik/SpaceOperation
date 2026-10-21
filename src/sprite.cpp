@@ -18,7 +18,7 @@ Sprite::Sprite(SpriteRenderer* renderer, const char* texture_file, double x, dou
 
 	this->hitbox = {
 		0, 0,
-		(int)floor(w), (int)floor(h)
+		(int)w, (int)h
 	};
 }
 

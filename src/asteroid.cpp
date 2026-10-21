@@ -39,6 +39,10 @@ Asteroid::Asteroid(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "a
 	};
 }
 
+Asteroid::~Asteroid() {
+	delete this->explosion;
+}
+
 void Asteroid::Render(double dt) {
 	SDL_Rect rect = {
 		(int)this->pos.x, (int)this->pos.y,

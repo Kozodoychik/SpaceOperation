@@ -30,10 +30,15 @@ Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.pn
 
 void Player::Render(double dt) {
 	if (this->is_moving) {
-		this->pos.x += this->key_map.d * (PLAYER_SPEED * dt);
-		this->pos.x -= this->key_map.a * (PLAYER_SPEED * dt);
-		this->pos.y += this->key_map.s * (PLAYER_SPEED * dt);
-		this->pos.y -= this->key_map.w * (PLAYER_SPEED * dt);
+		if (this->pos.x >= 0)
+			this->pos.x -= this->key_map.a * (PLAYER_SPEED * dt);
+		if (this->pos.x < 410)
+			this->pos.x += this->key_map.d * (PLAYER_SPEED * dt);
+
+		if (this->pos.y >= 0)
+			this->pos.y -= this->key_map.w * (PLAYER_SPEED * dt);
+		if (this->pos.y < 570)
+			this->pos.y += this->key_map.s * (PLAYER_SPEED * dt);
 	}
 
 	if (this->key_map.space) {
@@ -90,15 +95,18 @@ void Player::OnEvent(SDL_Event e) {
 }
 
 void Player::OnCollision(Sprite* collided) {
-	if (dynamic_cast<const Asteroid*>(collided) != nullptr && this->hit_timer <= 0) {
+	if ((dynamic_cast<const Asteroid*>(collided) != nullptr ||
+		dynamic_cast<const Bullet*>(collided) != nullptr) && 
+		this->hit_timer <= 0) {
+
 		this->sprite_renderer->DestroySprite(collided);
 		this->hp -= 10;
 		this->hit_timer = 20;
+	}
 
-		if (this->hp == 0) {
-			SDL_Event e{EVENT_GAME_OVER};
-			SDL_PushEvent(&e);
-			this->sprite_renderer->DestroySprite(this);
-		}
+	if (this->hp == 0) {
+		SDL_Event e{ EVENT_GAME_OVER };
+		SDL_PushEvent(&e);
+		this->sprite_renderer->DestroySprite(this);
 	}
 }

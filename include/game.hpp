@@ -22,5 +22,6 @@ public:
 
 	void MainLoop();
 	void GenerateAsteroids();
+	void GenerateEnemies();
 
 };
