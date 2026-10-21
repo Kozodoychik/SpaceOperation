@@ -1,4 +1,4 @@
-#ifndef SPRITE_HPP
+﻿#ifndef SPRITE_HPP
 #define SPRITE_HPP
 
 #include <SDL.h>

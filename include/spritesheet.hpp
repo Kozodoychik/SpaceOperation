@@ -1,4 +1,4 @@
-#ifndef SPRITESHEET_HPP
+﻿#ifndef SPRITESHEET_HPP
 #define SPRITESHEET_HPP
 
 #include <SDL.h>

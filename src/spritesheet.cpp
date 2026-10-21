@@ -1,4 +1,4 @@
-#include "spritesheet.hpp"
+п»ї#include "spritesheet.hpp"
 #include "logging.hpp"
 #include <SDL.h>
 #include <SDL_image.h>
@@ -28,7 +28,7 @@ Spritesheet::Spritesheet(SDL_Renderer* renderer, const char* path, int tileW, in
 
 			SDL_SetRenderTarget(renderer, this->texture);
 
-			// Генерируем текстуру розовой "шахматной доски"
+			// Р“РµРЅРµСЂРёСЂСѓРµРј С‚РµРєСЃС‚СѓСЂСѓ СЂРѕР·РѕРІРѕР№ "С€Р°С…РјР°С‚РЅРѕР№ РґРѕСЃРєРё"
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			SDL_RenderClear(renderer);
 			

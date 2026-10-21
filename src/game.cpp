@@ -1,4 +1,4 @@
-#include <SDL.h>
+п»ї#include <SDL.h>
 #include <iostream>
 #include <format>
 #include <cstdlib>
@@ -10,7 +10,7 @@
 #include "ui.hpp"
 #include "events.hpp"
 
-#define ASTEROID_CHANCE 1000 // 1 к 1000
+#define ASTEROID_CHANCE 1000 // 1 Рє 1000
 
 int Game::Initialize() {
 
@@ -74,26 +74,26 @@ void Game::MainLoop() {
 		SDL_SetRenderDrawColor(this->renderer, 0, 0, 40, 255);
 		SDL_RenderClear(this->renderer);
 
-		// Отображаем спрайты
+		// РћС‚РѕР±СЂР°Р¶Р°РµРј СЃРїСЂР°Р№С‚С‹
 
 		if (!this->is_gameover) {
 			this->GenerateAsteroids();
 			this->sprite_renderer->Render(dt);
 		}
 
-		// Отображаем элементы интерфейса
+		// РћС‚РѕР±СЂР°Р¶Р°РµРј СЌР»РµРјРµРЅС‚С‹ РёРЅС‚РµСЂС„РµР№СЃР°
 
 		this->ui_renderer->Render(dt);
 
-		// Выводим на экран
+		// Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ
 
 		SDL_RenderPresent(this->renderer);
 		SDL_UpdateWindowSurface(this->window);
 
-		// Обрабатываем события
+		// РћР±СЂР°Р±Р°С‚С‹РІР°РµРј СЃРѕР±С‹С‚РёСЏ
 
 		while (SDL_PollEvent(&e)) {
-			// Событие проигрыша
+			// РЎРѕР±С‹С‚РёРµ РїСЂРѕРёРіСЂС‹С€Р°
 			if (e.type == EVENT_GAME_OVER) {
 				Label* game_over_label = new Label(this->renderer, "GAME OVER!", 160, 312, 16);
 				this->ui_renderer->AddWidget(game_over_label);
@@ -101,7 +101,7 @@ void Game::MainLoop() {
 				this->is_gameover = true;
 			}
 
-			// Обрабатываем остальные события
+			// РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃРѕР±С‹С‚РёСЏ
 			switch (e.type) {
 			case SDL_QUIT: {
 				this->is_running = false;
@@ -114,7 +114,7 @@ void Game::MainLoop() {
 			}
 		}
 
-		// Подсчитываем deltaTime и ограничиваем FPS до 60
+		// РџРѕРґСЃС‡РёС‚С‹РІР°РµРј deltaTime Рё РѕРіСЂР°РЅРёС‡РёРІР°РµРј FPS РґРѕ 60
 
 		Uint64 frame_end = SDL_GetPerformanceCounter();
 

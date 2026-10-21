@@ -1,4 +1,4 @@
-#define LOG_FILE "game.log"
+﻿#define LOG_FILE "game.log"
 
 constexpr const char* __filename(const char* full_path) {
 

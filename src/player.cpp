@@ -1,4 +1,4 @@
-#include <SDL.h>
+﻿#include <SDL.h>
 #include "player.hpp"
 #include "spritesheet.hpp"
 #include "logging.hpp"
@@ -38,7 +38,7 @@ void Player::Render(double dt) {
 
 	if (this->key_map.space) {
 		if (this->bullet_timer >= BULLET_COOLDOWN) {
-			Bullet* bullet = new Bullet(this->sprite_renderer, (int)this->pos.x + 33, (int)this->pos.y - 10);
+			Bullet* bullet = new Bullet(this->sprite_renderer, (int)this->pos.x + 33, (int)this->pos.y - 10, {0, 1});
 			this->sprite_renderer->AddSprite(bullet);
 
 			this->bullet_timer = 0;

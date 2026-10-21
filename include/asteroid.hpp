@@ -1,4 +1,4 @@
-#include "sprite.hpp"
+﻿#include "sprite.hpp"
 #include "spritesheet.hpp"
 
 class Asteroid : public Sprite {

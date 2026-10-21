@@ -1,4 +1,4 @@
-#include <SDL.h>
+﻿#include <SDL.h>
 #include <cmath>
 #include <cstdlib>
 #include "sprite.hpp"
