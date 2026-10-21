@@ -2,6 +2,8 @@
 #include "sprite.hpp"
 #include "bullet.hpp"
 
+#define ENEMY_SPEED 150
+
 #define BULLET_COOLDOWN 0.5
 
 #define ANIMATION_FPS 32
@@ -34,8 +36,9 @@ Enemy::~Enemy() {
 }
 
 void Enemy::Render(double dt) {
-	this->pos.y += 100 * dt;
+	this->pos.y += ENEMY_SPEED * dt;
 	this->pos.x += this->x_speed * dt;
+
 	this->x_speed += 10 * dt * (this->move_to_left ? -1 : 1);
 
 	if (this->bullet_timer >= BULLET_COOLDOWN) {
