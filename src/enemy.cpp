@@ -1,6 +1,7 @@
 #include "enemy.hpp"
 #include "sprite.hpp"
 #include "bullet.hpp"
+#include "game.hpp"
 
 #define ENEMY_SPEED 150
 
@@ -82,6 +83,7 @@ void Enemy::OnCollision(Sprite* collided) {
 
 		if (this->hp == 0) {
 			this->is_destroyed = true;
+			Game::player->score += 50;
 		}
 	}
 }

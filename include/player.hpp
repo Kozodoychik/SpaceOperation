@@ -1,4 +1,7 @@
-﻿#include <SDL.h>
+﻿#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
+#include <SDL.h>
 #include "sprite.hpp"
 
 typedef union {
@@ -22,6 +25,7 @@ private:
 
 public:
 	int hp;
+	int score;
 
 	Player(SpriteRenderer* renderer);
 
@@ -29,3 +33,5 @@ public:
 	void OnEvent(SDL_Event e) override;
 	void OnCollision(Sprite* collided) override;
 };
+
+#endif

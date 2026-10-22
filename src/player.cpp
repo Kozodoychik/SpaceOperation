@@ -21,6 +21,7 @@ Player::Player(SpriteRenderer* renderer) : Sprite(renderer, "assets/spaceship.pn
 	this->bullet_timer = 0;
 	this->hit_timer = 0;
 	this->hp = PLAYER_HP;
+	this->score = 0;
 
 	this->hitbox = {
 		19, 8,
@@ -107,6 +108,6 @@ void Player::OnCollision(Sprite* collided) {
 	if (this->hp == 0) {
 		SDL_Event e{ EVENT_GAME_OVER };
 		SDL_PushEvent(&e);
-		this->sprite_renderer->DestroySprite(this);
+		//this->sprite_renderer->DestroySprite(this);
 	}
 }

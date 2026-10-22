@@ -41,6 +41,51 @@ void Label::Render(double dt) {
 	}
 }
 
+ProgressBar::ProgressBar(SDL_Renderer* renderer, double max, int x, int y, int w) : Widget(renderer, x, y) {
+	this->texture = new Spritesheet(renderer, "assets/progressbar.png", 1, 16);
+	this->max = max;
+	this->width = w;
+	this->value = 0;
+}
+
+ProgressBar::~ProgressBar() {
+	delete this->texture;
+}
+
+void ProgressBar::Render(double dt) {
+	SDL_Rect base = {
+		this->pos.x, this->pos.y,
+		this->width, 16
+	};
+
+	SDL_Rect filled = {
+		this->pos.x, this->pos.y,
+		this->width * (this->value / this->max), 16
+	};
+
+	this->texture->CopyTileTo(1, 0, &base);
+	this->texture->CopyTileTo(0, 0, &filled);
+}
+
+Image::Image(SDL_Renderer* renderer, const char* path, int x, int y, int w, int h) : Widget(renderer, x, y) {
+	this->texture = new Spritesheet(renderer, path, w, h);
+	this->size.w = w;
+	this->size.h = h;
+}
+
+Image::~Image() {
+	delete this->texture;
+}
+
+void Image::Render(double dt) {
+	SDL_Rect rect = {
+		this->pos.x, this->pos.y,
+		this->size.w, this->size.h
+	};
+
+	this->texture->CopyTileTo(0, 0, &rect);
+}
+
 UIRenderer::UIRenderer(SDL_Renderer* renderer) {
 	this->renderer = renderer;
 }

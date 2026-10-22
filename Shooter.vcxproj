@@ -289,10 +289,13 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\asteroid.png" />
+    <Image Include="assets\background.png" />
     <Image Include="assets\bullet.png" />
     <Image Include="assets\enemy.png" />
     <Image Include="assets\explosion.png" />
     <Image Include="assets\font.png" />
+    <Image Include="assets\hp_bar.png" />
+    <Image Include="assets\progressbar.png" />
     <Image Include="assets\spaceship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

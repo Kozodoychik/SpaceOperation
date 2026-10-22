@@ -382,5 +382,14 @@
     <Image Include="assets\enemy.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="assets\hp_bar.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\progressbar.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\background.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

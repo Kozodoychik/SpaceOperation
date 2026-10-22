@@ -14,6 +14,10 @@
 #define ASTEROID_CHANCE 5000 // 1 к 5000
 #define ENEMY_CHANCE 100000 // 1 к 100000
 
+SpriteRenderer* Game::sprite_renderer;
+UIRenderer* Game::ui_renderer;
+Player* Game::player;
+
 int Game::Initialize() {
 
 	logging::Info(MODULE_NAME, "Initializing SDL...");
@@ -50,16 +54,27 @@ int Game::Initialize() {
 	this->is_running = true;
 	this->is_gameover = false;
 
+	this->bg_scroll = 0;
+	this->background = new Spritesheet(this->renderer, "assets/background.png", 480, 1280);
+
 	return 0;
 
 }
 
 void Game::MainLoop() {
-	Label* hp_label = new Label(this->renderer, "HP: 0", 0, 0, 16);
-	this->ui_renderer->AddWidget(hp_label);
+	Image* hp_bar_back = new Image(this->renderer, "assets/hp_bar.png", 0, 0, 244, 20);
+	ProgressBar* hp_bar = new ProgressBar(this->renderer, 100, 0, 0, 240);
 
-	Player* player = new Player(this->sprite_renderer);
-	this->sprite_renderer->AddSprite(player);
+	Label* hp_label = new Label(this->renderer, "HP: 0", 0, 20, 16);
+	Label* score_label = new Label(this->renderer, "00000000", 352, 20, 16);
+
+	this->ui_renderer->AddWidget(hp_bar_back);
+	this->ui_renderer->AddWidget(hp_bar);
+	this->ui_renderer->AddWidget(hp_label);
+	this->ui_renderer->AddWidget(score_label);
+
+	this->player = new Player(this->sprite_renderer);
+	this->sprite_renderer->AddSprite(this->player);
 
 	logging::InfoColored(MODULE_NAME, "Entering MainLoop");
 
@@ -71,10 +86,14 @@ void Game::MainLoop() {
 	while (this->is_running) {
 		Uint64 frame_start = SDL_GetPerformanceCounter();
 
-		hp_label->text = std::format("HP: {}", player->hp);
+		hp_bar->value = this->player->hp;
+		hp_label->text = std::format("HP: {}", this->player->hp);
+		score_label->text = std::format("{:0>8}", this->player->score);
 
 		SDL_SetRenderDrawColor(this->renderer, 0, 0, 40, 255);
 		SDL_RenderClear(this->renderer);
+
+		this->RenderBackground(dt);
 
 		// Отображаем спрайты
 
@@ -160,4 +179,24 @@ void Game::GenerateEnemies() {
 		Enemy* enemy = new Enemy(this->sprite_renderer, x - 70, -50);
 		this->sprite_renderer->AddSprite(enemy);
 	}
+}
+
+void Game::RenderBackground(double dt) {
+	this->bg_scroll += 20 * dt;
+
+	if (this->bg_scroll >= 1280)
+		this->bg_scroll = 0;
+
+	SDL_Rect lower = {
+		0, (int)this->bg_scroll,
+		480, 1280
+	};
+
+	SDL_Rect upper = {
+		0, (int)this->bg_scroll - 1280,
+		480, 1280
+	};
+
+	this->background->CopyTileTo(0, 0, &lower);
+	this->background->CopyTileTo(0, 0, &upper);
 }

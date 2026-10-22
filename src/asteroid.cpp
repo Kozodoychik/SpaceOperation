@@ -7,6 +7,7 @@
 #include "bullet.hpp"
 #include "logging.hpp"
 #include "spritesheet.hpp"
+#include "game.hpp"
 
 #define MAX_ACCELERATION 10
 #define MAX_ROTATION_SPEED 60
@@ -82,6 +83,7 @@ void Asteroid::OnCollision(Sprite* collided) {
 
 		if (this->hp == 0) {
 			this->is_destroyed = true;
+     		Game::player->score += 5 * this->size_type;
 		}
 	}
 }

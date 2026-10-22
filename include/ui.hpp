@@ -35,6 +35,31 @@ public:
 	void Render(double dt) override;
 };
 
+class ProgressBar : public Widget {
+private:
+	Spritesheet* texture;
+	int width;
+
+public:
+	double value;
+	double max;
+
+	ProgressBar(SDL_Renderer* renderer, double max, int x, int y, int w);
+	~ProgressBar();
+
+	void Render(double dt) override;
+};
+
+class Image : public Widget {
+private:
+	Spritesheet* texture;
+
+public:
+	Image(SDL_Renderer* renderer, const char* path, int x, int y, int w, int h);
+	~Image();
+
+	void Render(double dt) override;
+};
 
 class UIRenderer {
 private:
