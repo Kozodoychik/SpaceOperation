@@ -12,7 +12,9 @@
 #include "events.hpp"
 
 #define ASTEROID_CHANCE 5000 // 1 к 5000
-#define ENEMY_CHANCE 100000 // 1 к 100000
+#define ENEMY_CHANCE 10000 // 1 к 10000
+
+#define FRAME_TIME 1.0 / 60.0
 
 SpriteRenderer* Game::sprite_renderer;
 UIRenderer* Game::ui_renderer;
@@ -39,7 +41,7 @@ int Game::Initialize() {
 		return -1;
 	}
 
-	this->renderer = SDL_CreateRenderer(this->window, 0, SDL_RENDERER_ACCELERATED);
+	this->renderer = SDL_CreateRenderer(this->window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
 	if (this->renderer == NULL) {
 		logging::Fatal(MODULE_NAME, std::format("Cannot create renderer: {}", SDL_GetError()).c_str());
@@ -51,8 +53,7 @@ int Game::Initialize() {
 	this->sprite_renderer = new SpriteRenderer(this->renderer);
 	this->ui_renderer = new UIRenderer(this->renderer);
 
-	this->is_running = true;
-	this->is_gameover = false;
+	this->state = RUNNING;
 
 	this->bg_scroll = 0;
 	this->background = new Spritesheet(this->renderer, "assets/background.png", 480, 1280);
@@ -79,11 +80,10 @@ void Game::MainLoop() {
 	logging::InfoColored(MODULE_NAME, "Entering MainLoop");
 
 	SDL_Event e;
-	double frame_time = 1.0 / 60.0;
 
 	double dt = 0;
 
-	while (this->is_running) {
+	while (this->state != STOPPED) {
 		Uint64 frame_start = SDL_GetPerformanceCounter();
 
 		hp_bar->value = this->player->hp;
@@ -95,46 +95,41 @@ void Game::MainLoop() {
 
 		this->RenderBackground(dt);
 
-		// Отображаем спрайты
+		switch (this->state) {
+		case RUNNING: {
 
-		if (!this->is_gameover) {
-			this->GenerateAsteroids();
+			//this->GenerateAsteroids();
 			this->GenerateEnemies();
 			this->sprite_renderer->Render(dt);
-		}
 
-		// Отображаем элементы интерфейса
+			while (SDL_PollEvent(&e)) {
+				if (e.type == EVENT_GAMEOVER) {
+					Label* game_over_label = new Label(this->renderer, "GAME OVER!", 160, 312, 16);
+					this->ui_renderer->AddWidget(game_over_label);
+
+					this->state = GAMEOVER;
+				}
+
+				this->sprite_renderer->HandleEvent(e);
+				this->HandleDefaultEvent(e);
+			}
+			break;
+
+		}
+		case GAMEOVER: {
+
+			while (SDL_PollEvent(&e)) {
+				this->HandleDefaultEvent(e);
+			}
+			break;
+
+		}
+		}
 
 		this->ui_renderer->Render(dt);
 
-		// Выводим на экран
-
 		SDL_RenderPresent(this->renderer);
 		SDL_UpdateWindowSurface(this->window);
-
-		// Обрабатываем события
-
-		while (SDL_PollEvent(&e)) {
-			// Событие проигрыша
-			if (e.type == EVENT_GAME_OVER) {
-				Label* game_over_label = new Label(this->renderer, "GAME OVER!", 160, 312, 16);
-				this->ui_renderer->AddWidget(game_over_label);
-
-				this->is_gameover = true;
-			}
-
-			// Обрабатываем остальные события
-			switch (e.type) {
-			case SDL_QUIT: {
-				this->is_running = false;
-				break;
-			}
-			default: {
-				if (!this->is_gameover)
-					this->sprite_renderer->HandleEvent(e);
-			}
-			}
-		}
 
 		// Подсчитываем deltaTime и ограничиваем FPS до 60
 
@@ -142,8 +137,8 @@ void Game::MainLoop() {
 
 		dt = ((double)(frame_end - frame_start) / (double)SDL_GetPerformanceFrequency());
 
-		if (dt < frame_time) {
-			SDL_Delay((Uint32)(floor(frame_time - dt) * 1000.0));
+		if (dt < FRAME_TIME) {
+			SDL_Delay((Uint32)(floor(FRAME_TIME - dt) * 1000.0));
 		}
 	}
 
@@ -199,4 +194,10 @@ void Game::RenderBackground(double dt) {
 
 	this->background->CopyTileTo(0, 0, &lower);
 	this->background->CopyTileTo(0, 0, &upper);
+}
+
+void Game::HandleDefaultEvent(SDL_Event e) {
+	switch (e.type) {
+	case SDL_QUIT: this->state = STOPPED; break;
+	}
 }

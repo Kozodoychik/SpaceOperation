@@ -27,7 +27,6 @@ public:
 
 	virtual void Render(double dt);
 	virtual void OnEvent(SDL_Event e);
-	virtual void OnCollision(Sprite* collided);
 };
 
 class SpriteRenderer {

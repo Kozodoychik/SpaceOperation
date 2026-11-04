@@ -93,21 +93,27 @@ void Player::OnEvent(SDL_Event e) {
 		break;
 	}
 	}
-}
 
-void Player::OnCollision(Sprite* collided) {
-	if ((dynamic_cast<const Asteroid*>(collided) != nullptr ||
-		dynamic_cast<const Bullet*>(collided) != nullptr) && 
-		this->hit_timer <= 0) {
+	if (e.type == EVENT_COLLISION) {
+		Sprite* collided = (Sprite*)e.user.data2;
 
-		this->sprite_renderer->DestroySprite(collided);
-		this->hp -= 10;
-		this->hit_timer = 20;
+		if ((dynamic_cast<const Asteroid*>(collided) != nullptr ||
+			dynamic_cast<const Bullet*>(collided) != nullptr) &&
+			this->hit_timer <= 0) {
+
+			this->sprite_renderer->DestroySprite(collided);
+			this->hp -= 10;
+			this->hit_timer = 20;
+		}
+
+		if (this->hp == 0) {
+			SDL_Event e{ EVENT_GAMEOVER };
+
+			SDL_PushEvent(&e);
+		}
 	}
 
-	if (this->hp == 0) {
-		SDL_Event e{ EVENT_GAME_OVER };
-		SDL_PushEvent(&e);
-		//this->sprite_renderer->DestroySprite(this);
+	if (e.type == EVENT_SCORE_ADD) {
+		this->score += e.user.code;
 	}
 }

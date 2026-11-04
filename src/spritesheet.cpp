@@ -71,7 +71,6 @@ void Spritesheet::CopyTileTo(int tileX, int tileY, SDL_Rect* dstRect) {
 		(int)this->tileSize.w, (int)this->tileSize.h
 	};
 
-	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	SDL_RenderCopy(this->renderer, this->texture, &srcRect, dstRect);
 }
 
@@ -90,7 +89,6 @@ void Spritesheet::CopyTileToEx(int tileX, int tileY, double rotation, SDL_Point*
 		(int)this->tileSize.w, (int)this->tileSize.h
 	};
 
-	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	SDL_RenderCopyEx(this->renderer, this->texture, &srcRect, dstRect, rotation, center, flip);
 }
 

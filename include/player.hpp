@@ -31,7 +31,6 @@ public:
 
 	void Render(double dt) override;
 	void OnEvent(SDL_Event e) override;
-	void OnCollision(Sprite* collided) override;
 };
 
 #endif

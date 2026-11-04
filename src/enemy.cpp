@@ -2,6 +2,7 @@
 #include "sprite.hpp"
 #include "bullet.hpp"
 #include "game.hpp"
+#include "events.hpp"
 
 #define ENEMY_SPEED 150
 
@@ -16,7 +17,7 @@ Enemy::Enemy(SpriteRenderer* renderer, int x, int y) : Sprite(renderer, "assets/
 	this->hp = 4;
 	this->x_speed = 10;
 
-	this->is_destroyed = false;
+	this->state = ALIVE;
 
 	if (x > 240)
 		this->move_to_left = true;
@@ -37,23 +38,33 @@ Enemy::~Enemy() {
 }
 
 void Enemy::Render(double dt) {
-	this->pos.y += ENEMY_SPEED * dt;
-	this->pos.x += this->x_speed * dt;
 
-	this->x_speed += 10 * dt * (this->move_to_left ? -1 : 1);
+	switch (this->state) {
+	case ALIVE: {
+		Sprite::Render(dt);
 
-	if (this->bullet_timer >= BULLET_COOLDOWN) {
-		Bullet* bullet1 = new Bullet(this->sprite_renderer, (int)this->pos.x + 14, (int)this->pos.y + 25, { 0.25, -1 });
-		Bullet* bullet2 = new Bullet(this->sprite_renderer, (int)this->pos.x + 67, (int)this->pos.y + 25, { -0.25, -1 });
+		this->pos.y += ENEMY_SPEED * dt;
+		this->pos.x += this->x_speed * dt;
 
-		this->sprite_renderer->AddSprite(bullet1);
-		this->sprite_renderer->AddSprite(bullet2);
+		this->x_speed += 10 * dt * (this->move_to_left ? -1 : 1);
 
-		this->bullet_timer = 0;
+		if (this->bullet_timer >= BULLET_COOLDOWN) {
+			Bullet* bullet1 = new Bullet(this->sprite_renderer, (int)this->pos.x + 14, (int)this->pos.y + 25, { 0.25, -1 });
+			Bullet* bullet2 = new Bullet(this->sprite_renderer, (int)this->pos.x + 67, (int)this->pos.y + 25, { -0.25, -1 });
+
+			this->sprite_renderer->AddSprite(bullet1);
+			this->sprite_renderer->AddSprite(bullet2);
+
+			this->bullet_timer = 0;
+		}
+		this->bullet_timer += dt;
+
+		if (this->pos.y >= 640)
+			this->sprite_renderer->DestroySprite(this);
+
+		break;
 	}
-	this->bullet_timer += dt;
-
-	if (this->is_destroyed) {
+	case DESTROYED: {
 		SDL_Rect rect = {
 			(int)this->pos.x, (int)this->pos.y,
 			(int)this->size.w, (int)this->size.h
@@ -67,23 +78,27 @@ void Enemy::Render(double dt) {
 			this->sprite_renderer->DestroySprite(this);
 
 		this->animation_counter += ANIMATION_FPS * dt;
-		return;
+		
+		break;
 	}
-
-	Sprite::Render(dt);
-
-	if (this->pos.y >= 640)
-		this->sprite_renderer->DestroySprite(this);
+	}
 }
 
-void Enemy::OnCollision(Sprite* collided) {
-	if (dynamic_cast<const Bullet*>(collided) != nullptr && !this->is_destroyed) {
-		this->sprite_renderer->DestroySprite(collided);
-		this->hp--;
+void Enemy::OnEvent(SDL_Event e) {
+	if (e.type == EVENT_COLLISION) {
+		Sprite* collided = (Sprite*)e.user.data2;
 
-		if (this->hp == 0) {
-			this->is_destroyed = true;
-			Game::player->score += 50;
+        if ((dynamic_cast<const Bullet*>(collided) != nullptr) && this->state != DESTROYED) {
+			this->sprite_renderer->DestroySprite(collided);
+			this->hp--;
+
+			if (this->hp == 0) {
+				this->state = DESTROYED;
+				
+				SDL_Event e{ EVENT_SCORE_ADD };
+				e.user.code = 50;
+				SDL_PushEvent(&e);
+			}
 		}
 	}
 }

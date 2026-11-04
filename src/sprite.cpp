@@ -4,6 +4,7 @@
 #include "sprite.hpp"
 #include "spritesheet.hpp"
 #include "logging.hpp"
+#include "events.hpp"
 
 
 Sprite::Sprite(SpriteRenderer* renderer, const char* texture_file, double x, double y, double w, double h) {
@@ -29,18 +30,17 @@ Sprite::~Sprite() {
 void Sprite::Render(double dt) {
 
 	SDL_Rect rect = {
-		(int)(floor(this->pos.x)), (int)(floor(this->pos.y)),
-		(int)(floor(this->size.w)), (int)(floor(this->size.h))
+		(int)this->pos.x, (int)this->pos.y,
+		(int)this->size.w, (int)this->size.h
 	};
 	
-	SDL_Point center = { int(this->size.w) / 2, int(this->size.h) / 2 };
+	SDL_Point center = { (int)this->size.w / 2, (int)this->size.h / 2 };
 
 	this->spritesheet->CopyTileToEx(0, 0, this->rotation_angle, &center, &rect, SDL_FLIP_NONE);
 
 }
 
 void Sprite::OnEvent(SDL_Event e) {}
-void Sprite::OnCollision(Sprite* collided) {}
 
 SpriteRenderer::SpriteRenderer(SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -93,8 +93,12 @@ void SpriteRenderer::Render(double dt) {
 			};
 
 			if (SDL_HasIntersection(&a, &b)) {
-				this->sprites[spriteA]->OnCollision(this->sprites[spriteB]);
-				this->sprites[spriteB]->OnCollision(this->sprites[spriteA]);
+				SDL_Event e = { EVENT_COLLISION };
+
+				e.user.data1 = this->sprites[spriteA];
+				e.user.data2 = this->sprites[spriteB];
+
+				SDL_PushEvent(&e);
 			}
 		}
 	}
@@ -104,7 +108,8 @@ void SpriteRenderer::HandleEvent(SDL_Event e) {
 	std::size_t count = this->sprites.size();
 
 	for (int i = 0; i < count; i++) {
-		this->sprites[i]->OnEvent(e);
+		if ((e.type == EVENT_COLLISION && e.user.data1 == this->sprites[i]) || e.type != EVENT_COLLISION)
+			this->sprites[i]->OnEvent(e);
 	}
 }
 

@@ -1,15 +1,26 @@
+#include <SDL.h>
 #include "sprite.hpp"
 #include "spritesheet.hpp"
 
+
 class Enemy : public Sprite {
 private:
+	
+	typedef enum {
+
+		ALIVE,
+		DESTROYED
+
+	} EnemyState;
+
 	double bullet_timer;
 	double x_speed;
 	double animation_counter;
 	int hp;
 
 	bool move_to_left;
-	bool is_destroyed;
+	
+	EnemyState state;
 
 	Spritesheet* explosion;
 
@@ -18,5 +29,5 @@ public:
 	~Enemy();
 
 	void Render(double dt) override;
-	void OnCollision(Sprite* collided) override;
+	void OnEvent(SDL_Event e) override;
 };
