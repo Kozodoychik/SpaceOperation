@@ -98,7 +98,7 @@ void Game::MainLoop() {
 		switch (this->state) {
 		case RUNNING: {
 
-			//this->GenerateAsteroids();
+			this->GenerateAsteroids();
 			this->GenerateEnemies();
 			this->sprite_renderer->Render(dt);
 
