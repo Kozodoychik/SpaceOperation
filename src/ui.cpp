@@ -1,6 +1,7 @@
 ﻿#include <SDL.h>
 #include "ui.hpp"
 #include "spritesheet.hpp"
+#include "types.hpp"
 
 Widget::Widget(SDL_Renderer* renderer, int x, int y) {
 	this->pos = { (double)x, (double)y };
@@ -51,13 +52,13 @@ ProgressBar::~ProgressBar() {
 
 void ProgressBar::Render(double dt) {
 	SDL_Rect base = {
-		this->pos.x, this->pos.y,
+		(int)this->pos.x, (int)this->pos.y,
 		this->width, 16
 	};
 
 	SDL_Rect filled = {
-		this->pos.x, this->pos.y,
-		this->width * (this->value / this->max), 16
+		(int)this->pos.x, (int)this->pos.y,
+		(int)(this->width * (this->value / this->max)), 16
 	};
 
 	this->texture->CopyTileTo(1, 0, &base);
@@ -76,8 +77,8 @@ Image::~Image() {
 
 void Image::Render(double dt) {
 	SDL_Rect rect = {
-		this->pos.x, this->pos.y,
-		this->size.w, this->size.h
+		(int)this->pos.x, (int)this->pos.y,
+		(int)this->size.w, (int)this->size.h
 	};
 
 	this->texture->CopyTileTo(0, 0, &rect);
