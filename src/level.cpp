@@ -1,14 +1,14 @@
-#include <SDL.h>
+п»ї#include <SDL.h>
 #include "level.hpp"
 #include "sprite.hpp"
 #include "player.hpp"
 #include "asteroid.hpp"
 #include "enemy.hpp"
 
-#define ASTEROID_CHANCE 5000 // 1 к 5000
-#define ENEMY_CHANCE 50000 // 1 к 50000
+#define ASTEROID_CHANCE 5000 // 1 Рє 5000
+#define ENEMY_CHANCE 50000 // 1 Рє 50000
 
-#define DIFFICULTY_CHANGE_AT 1000 // Увеличивать сложность каждые 1000 очков
+#define DIFFICULTY_CHANGE_AT 1000 // РЈРІРµР»РёС‡РёРІР°С‚СЊ СЃР»РѕР¶РЅРѕСЃС‚СЊ РєР°Р¶РґС‹Рµ 1000 РѕС‡РєРѕРІ
 
 LevelManager::LevelManager(SDL_Renderer* renderer) {
 

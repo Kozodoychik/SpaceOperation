@@ -1,4 +1,4 @@
-#ifndef MENU_HPP
+О╩©#ifndef MENU_HPP
 #define MENU_HPP
 
 #include <SDL.h>
@@ -22,15 +22,15 @@ private:
 	UIRenderer* gameplay_menu;
 	UIRenderer* gameover_menu;
 
-	// ==========щкелемрш лемч==========
+	// ==========п╜п⌡п∙п°п∙п²п╒п╚ п°п∙п²п╝==========
 
-	// щкелемрш цкюбмнцн лемч
+	// п╜п⌡п∙п°п∙п²п╒п╚ п⌠п⌡п░п▓п²п·п⌠п· п°п∙п²п╝
 
 	Label* title;
 	Label* play_button;
 	Label* exit_button;
 
-	// щкелемрш хцпнбнцн опнжеяяю
+	// п╜п⌡п∙п°п∙п²п╒п╚ п≤п⌠п═п·п▓п·п⌠п· п÷п═п·п╕п∙п║п║п░
 
 	Image* hp_bar_back;
 	ProgressBar* hp_bar;
@@ -38,13 +38,13 @@ private:
 	Label* score_counter;
 	Label* level_label;
 
-	// щкелемрш лемч оюсгш
+	// п╜п⌡п∙п°п∙п²п╒п╚ п°п∙п²п╝ п÷п░пёп≈п╚
 
 	Label* pause_label;
 	Label* resume_button;
 	Label* back_button;
 
-	// щкелемрш лемч опнхцпшью
+	// п╜п⌡п∙п°п∙п²п╒п╚ п°п∙п²п╝ п÷п═п·п≤п⌠п═п╚п╗п░
 
 	Label* gameover_label;
 	Label* retry_button;

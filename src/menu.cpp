@@ -1,4 +1,4 @@
-#include <SDL.h>
+ï»¿#include <SDL.h>
 #include <format>
 #include "menu.hpp"
 #include "ui.hpp"
@@ -18,9 +18,9 @@ MenuManager::MenuManager(SDL_Renderer* renderer) {
 
 	this->selected_entry = 0;
 
-	// ==========İËÅÌÅÍÒÛ ÌÅÍŞ==========
+	// ==========Ğ­Ğ›Ğ•ĞœĞ•ĞĞ¢Ğ« ĞœĞ•ĞĞ®==========
 
-	// İËÅÌÅÍÒÛ ÃËÀÂÍÎÃÎ ÌÅÍŞ
+	// Ğ­Ğ›Ğ•ĞœĞ•ĞĞ¢Ğ« Ğ“Ğ›ĞĞ’ĞĞĞ“Ğ ĞœĞ•ĞĞ®
 
 	this->title = new Label(renderer, "SPACE OPERATION", 53, 250, 25);
 	this->play_button = new Label(renderer, "PLAY", 208, 312, 16);
@@ -30,7 +30,7 @@ MenuManager::MenuManager(SDL_Renderer* renderer) {
 	this->main_menu->AddWidget(this->play_button);
 	this->main_menu->AddWidget(this->exit_button);
 
-	// İËÅÌÅÍÒÛ ÈÃĞÎÂÎÃÎ ÏĞÎÖÅÑÑÀ
+	// Ğ­Ğ›Ğ•ĞœĞ•ĞĞ¢Ğ« Ğ˜Ğ“Ğ ĞĞ’ĞĞ“Ğ ĞŸĞ ĞĞ¦Ğ•Ğ¡Ğ¡Ğ
 
 	this->hp_bar_back = new Image(renderer, "assets/hp_bar.png", 0, 0, 244, 20);
 	this->hp_bar = new ProgressBar(renderer, 100, 0, 0, 240);
@@ -44,7 +44,7 @@ MenuManager::MenuManager(SDL_Renderer* renderer) {
 	this->gameplay_menu->AddWidget(this->score_counter);
 	this->gameplay_menu->AddWidget(this->level_label);
 
-	// İËÅÌÅÍÒÛ ÌÅÍŞ ÏÀÓÇÛ
+	// Ğ­Ğ›Ğ•ĞœĞ•ĞĞ¢Ğ« ĞœĞ•ĞĞ® ĞŸĞĞ£Ğ—Ğ«
 
 	this->pause_label = new Label(renderer, "PAUSE", 165, 250, 30);
 	this->resume_button = new Label(renderer, "RESUME", 192, 344, 16);
@@ -54,7 +54,7 @@ MenuManager::MenuManager(SDL_Renderer* renderer) {
 	this->pause_menu->AddWidget(this->resume_button);
 	this->pause_menu->AddWidget(this->back_button);
 
-	// İËÅÌÅÍÒÛ ÌÅÍŞ ÏĞÎÈÃĞÛØÀ
+	// Ğ­Ğ›Ğ•ĞœĞ•ĞĞ¢Ğ« ĞœĞ•ĞĞ® ĞŸĞ ĞĞ˜Ğ“Ğ Ğ«Ğ¨Ğ
 
 	this->gameover_label = new Label(renderer, "GAME OVER", 105, 250, 30);
 	this->retry_button = new Label(renderer, "RETRY", 160, 344, 16);
@@ -71,7 +71,7 @@ MenuManager::MenuManager(SDL_Renderer* renderer) {
 
 MenuManager::~MenuManager() {
 	
-	// Âñå âèäæåòû óíè÷òîæàşòñÿ âìåñòå ñ ğåíäåğåğàìè
+	// Ğ’ÑĞµ Ğ²Ğ¸Ğ´Ğ¶ĞµÑ‚Ñ‹ ÑƒĞ½Ğ¸Ñ‡Ñ‚Ğ¾Ğ¶Ğ°ÑÑ‚ÑÑ Ğ²Ğ¼ĞµÑÑ‚Ğµ Ñ Ñ€ĞµĞ½Ğ´ĞµÑ€ĞµÑ€Ğ°Ğ¼Ğ¸
 
 	logging::Info(MODULE_NAME, "Destroying menu manager...");
 
