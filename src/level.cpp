@@ -8,7 +8,7 @@
 #define ASTEROID_CHANCE 5000 // 1 к 5000
 #define ENEMY_CHANCE 50000 // 1 к 50000
 
-#define DIFFICULTY_CHANGE_AT 1000 // Увеличивать сложность каждые 100 очков
+#define DIFFICULTY_CHANGE_AT 1000 // Увеличивать сложность каждые 1000 очков
 
 LevelManager::LevelManager(SDL_Renderer* renderer) {
 
