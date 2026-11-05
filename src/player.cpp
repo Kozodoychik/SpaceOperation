@@ -1,9 +1,7 @@
 ﻿#include <SDL.h>
 #include "player.hpp"
 #include "spritesheet.hpp"
-#include "logging.hpp"
 #include "bullet.hpp"
-#include "asteroid.hpp"
 #include "events.hpp"
 
 #define PLAYER_SPEED 250.0

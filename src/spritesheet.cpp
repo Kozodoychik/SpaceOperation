@@ -1,8 +1,8 @@
-﻿#include "spritesheet.hpp"
-#include "logging.hpp"
-#include <SDL.h>
+﻿#include <SDL.h>
 #include <SDL_image.h>
 #include <format>
+#include "spritesheet.hpp"
+#include "logging.hpp"
 
 std::unordered_map<const char*, SDL_Texture*> Spritesheet::spritesheet_cache;
 

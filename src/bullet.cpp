@@ -2,7 +2,6 @@
 #include <numbers>
 #include "bullet.hpp"
 #include "sprite.hpp"
-#include "types.hpp"
 #include "events.hpp"
 #include "player.hpp"
 

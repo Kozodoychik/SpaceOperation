@@ -1,11 +1,7 @@
 ﻿#include <SDL.h>
-#include <cstdlib>
-#include <ctime>
 #include <cmath>
-#include <iostream>
 #include "asteroid.hpp"
 #include "bullet.hpp"
-#include "logging.hpp"
 #include "spritesheet.hpp"
 #include "game.hpp"
 #include "events.hpp"

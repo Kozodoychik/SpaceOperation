@@ -1,9 +1,8 @@
 #include "enemy.hpp"
 #include "sprite.hpp"
 #include "bullet.hpp"
-#include "game.hpp"
+#include "player.hpp"
 #include "events.hpp"
-#include "logging.hpp"
 
 #define ENEMY_SPEED 150
 

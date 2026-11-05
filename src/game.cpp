@@ -1,7 +1,5 @@
 ﻿#include <SDL.h>
-#include <iostream>
 #include <format>
-#include <cstdlib>
 #include "game.hpp"
 #include "logging.hpp"
 #include "spritesheet.hpp"
@@ -119,6 +117,8 @@ void Game::MainLoop() {
 	logging::Info(MODULE_NAME, "Destroying window and renderer...");
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
+
+	Spritesheet::ClearCache();
 
 	delete this->level_manager;
 	delete this->menu_manager;

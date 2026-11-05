@@ -1,9 +1,6 @@
 ﻿#include <SDL.h>
-#include <cmath>
-#include <cstdlib>
 #include "sprite.hpp"
 #include "spritesheet.hpp"
-#include "logging.hpp"
 #include "events.hpp"
 
 
@@ -50,8 +47,6 @@ SpriteRenderer::~SpriteRenderer() {
 	for (Sprite* sprite : this->sprites) {
 		delete sprite;
 	}
-
-	//Spritesheet::ClearCache();
 }
 
 void SpriteRenderer::Render(double dt) {

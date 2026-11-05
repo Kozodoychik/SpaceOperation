@@ -1,9 +1,6 @@
-﻿#include <string>
-#include <format>
-#include <cstdlib>
+﻿#include <SDL.h>
 #include "ui.hpp"
 #include "spritesheet.hpp"
-#include "logging.hpp"
 
 Widget::Widget(SDL_Renderer* renderer, int x, int y) {
 	this->pos = { (double)x, (double)y };
