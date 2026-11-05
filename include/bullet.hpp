@@ -1,4 +1,5 @@
-﻿#include "sprite.hpp"
+﻿#include <SDL.h>
+#include "sprite.hpp"
 #include "types.hpp"
 
 
@@ -10,4 +11,5 @@ public:
 	Bullet(SpriteRenderer* renderer, int x, int y, types::Vector2d direction);
 
 	void Render(double dt) override;
+	void OnEvent(SDL_Event e) override;
 };

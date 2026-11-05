@@ -88,10 +88,12 @@ void Asteroid::Render(double dt) {
 }
 
 void Asteroid::OnEvent(SDL_Event e) {
+	if (this->state == DESTROYED) return;
+
 	if (e.type == EVENT_COLLISION) {
 		Sprite* collided = (Sprite*)e.user.data2;
 
-		if (dynamic_cast<const Bullet*>(collided) != nullptr && this->state != DESTROYED) {
+		if (dynamic_cast<const Bullet*>(collided) != nullptr) {
 			this->sprite_renderer->DestroySprite(collided);
 			this->hp--;
 
@@ -99,10 +101,17 @@ void Asteroid::OnEvent(SDL_Event e) {
 				this->state = DESTROYED;
 
 				SDL_Event e{ EVENT_SCORE_ADD };
-				e.user.code = 5 * this->size_type;
+				e.user.code = 50 + (this->size_type * 25);
 				SDL_PushEvent(&e);
-				//Game::player->score += 5 * this->size_type;
 			}
+		}
+		else if (dynamic_cast<const Player*>(collided) != nullptr) {
+			if (dynamic_cast<Player*>(collided)->hit_timer <= 0)
+				this->state = DESTROYED;
+
+			SDL_Event e{ EVENT_PLAYER_DAMAGE };
+			e.user.code = 10;
+			SDL_PushEvent(&e);
 		}
 	}
 }

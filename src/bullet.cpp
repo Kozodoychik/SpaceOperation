@@ -3,6 +3,8 @@
 #include "bullet.hpp"
 #include "sprite.hpp"
 #include "types.hpp"
+#include "events.hpp"
+#include "player.hpp"
 
 Bullet::Bullet(SpriteRenderer* renderer, int x, int y, types::Vector2d direction) : Sprite(renderer, "assets/bullet.png", x, y, 5, 16) {
 	this->direction = direction;
@@ -21,5 +23,21 @@ void Bullet::Render(double dt) {
 		this->pos.x <= 0 ||
 		this->pos.x > 640) {
 		this->sprite_renderer->DestroySprite(this);
+	}
+}
+
+void Bullet::OnEvent(SDL_Event e) {
+	if (e.type == EVENT_COLLISION) {
+		Sprite* collided = (Sprite*)e.user.data2;
+
+		if (dynamic_cast<const Player*>(collided) != nullptr) {
+			if (dynamic_cast<Player*>(collided)->hit_timer <= 0) {
+				SDL_Event e{ EVENT_PLAYER_DAMAGE };
+				e.user.code = 10;
+				SDL_PushEvent(&e);
+
+				this->sprite_renderer->DestroySprite(this);
+			}
+		}
 	}
 }

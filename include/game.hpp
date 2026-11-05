@@ -3,8 +3,8 @@
 
 #include <SDL.h>
 #include <vector>
-#include "sprite.hpp"
-#include "ui.hpp"
+#include "level.hpp"
+#include "menu.hpp"
 #include "player.hpp"
 
 class Game {
@@ -14,6 +14,7 @@ private:
 	typedef enum {
 
 		RUNNING,
+		FREEZE,
 		GAMEOVER,
 		STOPPED
 
@@ -28,15 +29,12 @@ private:
 
 	double bg_scroll;
 
-	void GenerateAsteroids();
-	void GenerateEnemies();
-	void RenderBackground(double dt);
 	void HandleDefaultEvent(SDL_Event e);
 
 public:
 
-	static SpriteRenderer* sprite_renderer;
-	static UIRenderer* ui_renderer;
+	static LevelManager* level_manager;
+	static MenuManager* menu_manager;
 	static Player* player;
 
 	int Initialize();

@@ -18,7 +18,6 @@ typedef union {
 class Player : public Sprite {
 private:
 	double bullet_timer;
-	double hit_timer;
 
 	bool is_moving = false;
 	KeyMap key_map;
@@ -26,6 +25,7 @@ private:
 public:
 	int hp;
 	int score;
+	double hit_timer;
 
 	Player(SpriteRenderer* renderer);
 

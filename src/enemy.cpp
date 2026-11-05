@@ -3,6 +3,7 @@
 #include "bullet.hpp"
 #include "game.hpp"
 #include "events.hpp"
+#include "logging.hpp"
 
 #define ENEMY_SPEED 150
 
@@ -85,20 +86,30 @@ void Enemy::Render(double dt) {
 }
 
 void Enemy::OnEvent(SDL_Event e) {
+	if (this->state == DESTROYED) return;
+
 	if (e.type == EVENT_COLLISION) {
 		Sprite* collided = (Sprite*)e.user.data2;
 
-        if ((dynamic_cast<const Bullet*>(collided) != nullptr) && this->state != DESTROYED) {
+        if ((dynamic_cast<const Bullet*>(collided) != nullptr)) {
 			this->sprite_renderer->DestroySprite(collided);
 			this->hp--;
 
 			if (this->hp == 0) {
 				this->state = DESTROYED;
-				
+
 				SDL_Event e{ EVENT_SCORE_ADD };
-				e.user.code = 50;
+				e.user.code = 250;
 				SDL_PushEvent(&e);
 			}
+		}
+		else if (dynamic_cast<const Player*>(collided) != nullptr) {
+			if (dynamic_cast<Player*>(collided)->hit_timer <= 0)
+				this->state = DESTROYED;
+
+			SDL_Event e{ EVENT_PLAYER_DAMAGE };
+			e.user.code = 10;
+			SDL_PushEvent(&e);
 		}
 	}
 }

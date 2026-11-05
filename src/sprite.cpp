@@ -51,7 +51,7 @@ SpriteRenderer::~SpriteRenderer() {
 		delete sprite;
 	}
 
-	Spritesheet::ClearCache();
+	//Spritesheet::ClearCache();
 }
 
 void SpriteRenderer::Render(double dt) {

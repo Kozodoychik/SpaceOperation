@@ -176,7 +176,9 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClInclude Include="include\enemy.hpp" />
     <ClInclude Include="include\events.hpp" />
     <ClInclude Include="include\game.hpp" />
+    <ClInclude Include="include\level.hpp" />
     <ClInclude Include="include\logging.hpp" />
+    <ClInclude Include="include\menu.hpp" />
     <ClInclude Include="include\player.hpp" />
     <ClInclude Include="include\sprite.hpp" />
     <ClInclude Include="include\spritesheet.hpp" />
@@ -280,8 +282,10 @@ copy $(ProjectDir)\libs\SDL2_image-2.8.4\lib\$(PlatformTarget)\SDL2_image.dll $(
     <ClCompile Include="src\bullet.cpp" />
     <ClCompile Include="src\enemy.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\level.cpp" />
     <ClCompile Include="src\logging.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\spritesheet.cpp" />
